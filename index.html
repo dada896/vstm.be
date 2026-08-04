@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VSTM – Vincent Mersch | Petits travaux en Belgique</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --gold: #C89010;
+      --gold-light: #F0D060;
+      --black: #0d0d0d;
+      --dark: #161616;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--black);
+      color: var(--white);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13,13,13,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,144,16,0.25);
+      padding: 16px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo { font-size: 20px; font-weight: 900; letter-spacing: 3px; }
+    .nav-logo span { color: var(--gold); }
+    nav ul { list-style: none; display: flex; gap: 32px; }
+    nav a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; transition: color .2s; }
+    nav a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      padding: 120px 24px 80px;
+      background: radial-gradient(ellipse at 50% 40%, rgba(200,144,16,0.09) 0%, transparent 65%), #0d0d0d;
+      position: relative; overflow: hidden;
+    }
+
+    .logo-svg { width: 340px; max-width: 88vw; margin-bottom: 10px; }
+
+    .tagline {
+      color: var(--gold);
+      font-size: 14px;
+      letter-spacing: 7px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .slogan {
+      font-size: 20px;
+      color: rgba(255,255,255,0.75);
+      font-style: italic;
+      margin-bottom: 44px;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 38px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      color: #0d0d0d;
+      text-decoration: none;
+      font-weight: 800; font-size: 14px;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      border-radius: 3px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(200,144,16,0.45); }
+
+    /* ── SECTIONS ── */
+    section { padding: 90px 24px; }
+    .container { max-width: 1040px; margin: 0 auto; }
+
+    .section-title {
+      text-align: center;
+      font-size: 30px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 3px;
+      margin-bottom: 14px;
+    }
+    .section-title span { color: var(--gold); }
+
+    .divider {
+      width: 56px; height: 3px;
+      background: linear-gradient(90deg, var(--gold-light), var(--gold));
+      margin: 0 auto 56px; border-radius: 2px;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--dark); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(200,144,16,0.18);
+      border-radius: 10px;
+      padding: 32px 16px;
+      text-align: center;
+      transition: border-color .25s, transform .25s, background .25s;
+      cursor: default;
+    }
+    .card:hover {
+      border-color: var(--gold);
+      background: rgba(200,144,16,0.06);
+      transform: translateY(-5px);
+    }
+    .card i { font-size: 30px; color: var(--gold); margin-bottom: 14px; display: block; }
+    .card p { font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.82); line-height: 1.5; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--black); }
+
+    .about-inner {
+      max-width: 780px; margin: 0 auto; text-align: center;
+    }
+    .about-inner p {
+      font-size: 17px; line-height: 1.9;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 48px;
+    }
+    .about-inner em { color: rgba(255,255,255,0.95); }
+
+    .points {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      text-align: left;
+    }
+    .point {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 15px; color: rgba(255,255,255,0.85);
+    }
+    .point i { color: var(--gold); font-size: 18px; flex-shrink: 0; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--dark); }
+
+    .contact-items {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+
+    .contact-item { text-align: center; }
+
+    .c-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(200,144,16,0.1);
+      border: 2px solid rgba(200,144,16,0.5);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+      transition: border-color .2s, background .2s;
+    }
+    .contact-item:hover .c-icon {
+      border-color: var(--gold);
+      background: rgba(200,144,16,0.18);
+    }
+    .c-icon i { font-size: 22px; color: var(--gold); }
+
+    .contact-item .label {
+      display: block;
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 6px;
+    }
+    .contact-item a {
+      font-size: 17px; font-weight: 700;
+      color: var(--white); text-decoration: none;
+      transition: color .2s;
+    }
+    .contact-item a:hover { color: var(--gold); }
+    .contact-item .nolink { font-size: 17px; font-weight: 700; }
+
+    .contact-cta { text-align: center; }
+
+    /* ── FORMULAIRE ── */
+    .form-wrap {
+      max-width: 580px;
+      margin: 0 auto;
+    }
+    .form-wrap input,
+    .form-wrap textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(200,144,16,0.25);
+      border-radius: 6px;
+      padding: 14px 18px;
+      color: var(--white);
+      font-family: inherit;
+      font-size: 15px;
+      margin-bottom: 14px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .form-wrap input:focus,
+    .form-wrap textarea:focus { border-color: var(--gold); }
+    .form-wrap textarea { height: 140px; resize: vertical; }
+    .form-wrap button {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      color: #0d0d0d;
+      font-weight: 800; font-size: 14px;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      border: none; border-radius: 4px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .form-wrap button:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,144,16,0.4); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080808;
+      border-top: 1px solid rgba(200,144,16,0.15);
+      text-align: center;
+      padding: 26px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.28);
+    }
+    footer span { color: var(--gold); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      nav ul { display: none; }
+      nav { padding: 16px 24px; }
+      .section-title { font-size: 24px; }
+      .slogan { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">VST<span>M</span></div>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <div>
+    <!-- LOGO SVG -->
+    <svg class="logo-svg" viewBox="0 0 380 270" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gld" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"   stop-color="#F0D060"/>
+          <stop offset="55%"  stop-color="#C89010"/>
+          <stop offset="100%" stop-color="#906800"/>
+        </linearGradient>
+      </defs>
+      <!-- Toit gauche -->
+      <line x1="118" y1="96" x2="190" y2="26" stroke="url(#gld)" stroke-width="8" stroke-linecap="round"/>
+      <!-- Toit droit -->
+      <line x1="190" y1="26" x2="262" y2="96" stroke="url(#gld)" stroke-width="8" stroke-linecap="round"/>
+      <!-- Fenêtre 4 carreaux centrée sous le faîte -->
+      <rect x="172" y="52" width="13" height="13" fill="url(#gld)" rx="1.5"/>
+      <rect x="190" y="52" width="13" height="13" fill="url(#gld)" rx="1.5"/>
+      <rect x="172" y="69" width="13" height="13" fill="url(#gld)" rx="1.5"/>
+      <rect x="190" y="69" width="13" height="13" fill="url(#gld)" rx="1.5"/>
+      <!-- VSTM -->
+      <text x="190" y="200"
+        font-family="'Arial Black', 'Franklin Gothic Heavy', Impact, sans-serif"
+        font-weight="900" font-size="128" text-anchor="middle" letter-spacing="-3">
+        <tspan fill="#FFFFFF">VST</tspan><tspan fill="url(#gld)">M</tspan>
+      </text>
+      <!-- VINCENT MERSCH -->
+      <line x1="22"  y1="226" x2="108" y2="226" stroke="url(#gld)" stroke-width="1.5"/>
+      <line x1="272" y1="226" x2="358" y2="226" stroke="url(#gld)" stroke-width="1.5"/>
+      <text x="190" y="231"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="15" fill="#C89010" text-anchor="middle" letter-spacing="5">VINCENT MERSCH</text>
+    </svg>
+
+    <div class="tagline">Polyvalent &bull; Réactif &bull; Fiable</div>
+    <div class="slogan">Un seul contact pour tous vos petits travaux&nbsp;!</div>
+    <a href="#contact" class="btn"><i class="fa-solid fa-file-lines"></i>Devis gratuit</a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <h2 class="section-title">Nos <span>Services</span></h2>
+    <div class="divider"></div>
+    <div class="services-grid">
+      <div class="card"><i class="fa-solid fa-screwdriver-wrench"></i><p>Petits travaux en tout genre</p></div>
+      <div class="card"><i class="fa-solid fa-hammer"></i><p>Petites rénovations</p></div>
+      <div class="card"><i class="fa-solid fa-trowel-bricks"></i><p>Petits travaux de maçonnerie</p></div>
+      <div class="card"><i class="fa-solid fa-faucet-drip"></i><p>Plomberie</p></div>
+      <div class="card"><i class="fa-solid fa-bolt"></i><p>Électricité</p></div>
+      <div class="card"><i class="fa-solid fa-couch"></i><p>Montage de meubles</p></div>
+      <div class="card"><i class="fa-solid fa-tree"></i><p>Aménagement extérieur</p></div>
+      <div class="card"><i class="fa-solid fa-paint-roller"></i><p>Peinture</p></div>
+      <div class="card"><i class="fa-solid fa-ellipsis"></i><p>Et bien plus encore…</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">À <span>Propos</span></h2>
+    <div class="divider"></div>
+    <div class="about-inner">
+      <p>
+        Basé à Poulseur en région liégeoise, je suis un indépendant polyvalent spécialisé dans les petits travaux du quotidien.
+        Intérieur ou extérieur, je prends en charge vos travaux avec sérieux, réactivité et le souci du travail bien fait.<br><br>
+        <em>« Polyvalent, je m'occupe de vos petits travaux comme des grands ! »</em>
+      </p>
+      <div class="points">
+        <div class="point"><i class="fa-solid fa-circle-check"></i> Travaux intérieurs &amp; extérieurs</div>
+        <div class="point"><i class="fa-solid fa-circle-check"></i> Entretien &amp; dépannage</div>
+        <div class="point"><i class="fa-solid fa-circle-check"></i> Solutions rapides et efficaces</div>
+        <div class="point"><i class="fa-solid fa-circle-check"></i> Devis gratuit</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title">Nous <span>Contacter</span></h2>
+    <div class="divider"></div>
+    <div class="contact-items">
+      <div class="contact-item">
+        <div class="c-icon"><i class="fa-solid fa-phone"></i></div>
+        <span class="label">Téléphone</span>
+        <a href="tel:+32476648958">0476 64 89 58</a>
+      </div>
+      <div class="contact-item">
+        <div class="c-icon"><i class="fa-solid fa-envelope"></i></div>
+        <span class="label">Email</span>
+        <a href="mailto:info@vstm.be">info@vstm.be</a>
+      </div>
+      <div class="contact-item">
+        <div class="c-icon"><i class="fa-brands fa-facebook-f"></i></div>
+        <span class="label">Facebook</span>
+        <!-- Remplace le # par l'URL de ta page Facebook quand tu l'as -->
+        <a href="#" target="_blank" rel="noopener">Suivez-nous</a>
+      </div>
+    </div>
+
+    <!-- FORMULAIRE FORMSPREE -->
+    <!-- ⚠️ Remplace XXXXXXXX par ton ID Formspree (formspree.io) -->
+    <div class="form-wrap">
+      <form action="https://formspree.io/f/XXXXXXXX" method="POST">
+        <input type="text"  name="name"    placeholder="Votre nom" required>
+        <input type="email" name="email"   placeholder="Votre email" required>
+        <input type="tel"   name="phone"   placeholder="Votre téléphone (optionnel)">
+        <textarea           name="message" placeholder="Décrivez votre travaux…" required></textarea>
+        <button type="submit"><i class="fa-solid fa-paper-plane"></i>Envoyer ma demande</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>VSTM</span> — Vincent Mersch &nbsp;·&nbsp; Belgique &nbsp;·&nbsp;
+  <a href="mailto:info@vstm.be" style="color:rgba(255,255,255,0.28)">info@vstm.be</a></p>
+</footer>
+
+</body>
+</html>
